@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TextInput, View, StyleSheet } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { Colors } from '../../constants/styles';
 
 const Input = ({
   label,
@@ -12,7 +12,7 @@ const Input = ({
 }) => {
   return (
     <View style={styles.inputContainer}>
-      <Text style={isInvaild && styles.labelInvaild}>{label}</Text>
+      <Text style={isInvaild && styles.labelInvalid}>{label}</Text>
       <TextInput
         style={[styles.input, isInvaild && styles.inputInValid]} // 스타일 적용이 두개 이상이면 배열로 묶어서 전달.
         autoCapitalize='none'
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginVertical: 8,
   },
-  labelInvaild: {
+  labelInvalid: {
     color: Colors.error500,
   },
   input: {
