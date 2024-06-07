@@ -7,13 +7,13 @@ const AuthForm = ({ isLogin, onSubmit, credentialsInvalid }) => {
   const [enteredEmail, setEnteredEmail] = useState('');
   const [enteredName, setEnteredName] = useState('');
   const [enteredPassword, setEnteredPassword] = useState('');
-  const [enteredComfirmPassword, setEnteredComfirmPassword] = useState('');
+  const [enteredConfirmPassword, setEnteredConfirmPassword] = useState('');
 
   const {
-    email: emailIsVaild,
-    name: nameIsVaild,
-    password: passwordIsVaild,
-    confirmPassoword: passwordDontMatch,
+    email: emailIsValid,
+    name: nameIsValid,
+    password: passwordIsValid,
+    confirmPassword: passwordDontMatch,
   } = credentialsInvalid;
 
   const updateInputValueHandler = (inputType, enteredValue) => {
@@ -30,20 +30,20 @@ const AuthForm = ({ isLogin, onSubmit, credentialsInvalid }) => {
       case 'password':
         setEnteredPassword(enteredValue);
         break;
-      case 'comfirmPassword':
-        setEnteredComfirmPassword(enteredValue);
+      case 'confirmPassword':
+        setEnteredConfirmPassword(enteredValue);
         break;
     }
   };
 
-  const sumbmitHandler = () => {
+  const submitHandler = () => {
     console.log('버튼 클릭됨! submit!');
     // 사용자의 입력 상태값을 객체로 포장해서 AuthContent에게 넘긴다 -> 부모쪽에서 유효성 검증 할 것.
     onSubmit({
       email: enteredEmail,
       name: enteredName,
       password: enteredPassword,
-      confirmPassoword: enteredComfirmPassword,
+      confirmPassword: enteredConfirmPassword,
     });
   };
 
@@ -57,14 +57,14 @@ const AuthForm = ({ isLogin, onSubmit, credentialsInvalid }) => {
           // bind에 제공되는 첫번째 인수는 곧 실행할 함수의  this 키워드로 설정됩니다.
           // 두 번째 인수는 지정한 함수에 전달할 값을 세팅하면 됩니다.
           onUpdateValue={updateInputValueHandler.bind(this, 'email')}
-          isInVaild={emailIsVaild}
+          isInValid={emailIsValid}
           value={enteredEmail}
         />
         {!isLogin && (
           <Input
             label='이름'
             onUpdateValue={updateInputValueHandler.bind(this, 'name')}
-            isInVaild={nameIsVaild}
+            isInValid={nameIsValid}
             value={enteredName}
           />
         )}
@@ -72,8 +72,8 @@ const AuthForm = ({ isLogin, onSubmit, credentialsInvalid }) => {
           label='비밀번호'
           secure
           onUpdateValue={updateInputValueHandler.bind(this, 'password')}
-          isInVaild={passwordIsVaild}
-          enteredPassword={enteredPassword}
+          isInValid={passwordIsValid}
+          value={enteredPassword}
         />
         {!isLogin && (
           <Input
@@ -81,14 +81,14 @@ const AuthForm = ({ isLogin, onSubmit, credentialsInvalid }) => {
             secure
             onUpdateValue={updateInputValueHandler.bind(
               this,
-              'comfirmPassword',
+              'confirmPassword',
             )}
-            isInVaild={passwordDontMatch}
-            value={enteredComfirmPassword}
+            isInValid={passwordDontMatch}
+            value={enteredConfirmPassword}
           />
         )}
-        <View style={styles.button}>
-          <Button onPress={sumbmitHandler}>
+        <View style={styles.buttons}>
+          <Button onPress={submitHandler}>
             {isLogin ? '로그인' : '회원가입'}
           </Button>
         </View>
@@ -100,7 +100,7 @@ const AuthForm = ({ isLogin, onSubmit, credentialsInvalid }) => {
 export default AuthForm;
 
 const styles = StyleSheet.create({
-  button: {
+  buttons: {
     marginTop: 12,
   },
 });

@@ -5,7 +5,7 @@ import AuthContent from './components/Auth/AuthContent';
 import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
-import { Colors } from '../../../constants/styles';
+import { Colors } from './constants/styles';
 import { NavigationContainer } from '@react-navigation/native';
 
 const Stack = createStackNavigator();

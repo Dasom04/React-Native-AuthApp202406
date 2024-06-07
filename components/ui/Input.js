@@ -8,13 +8,13 @@ const Input = ({
   secure,
   onUpdateValue,
   value,
-  isInvaild,
+  isInvalid,
 }) => {
   return (
     <View style={styles.inputContainer}>
-      <Text style={isInvaild && styles.labelInvalid}>{label}</Text>
+      <Text style={isInvalid && styles.labelInvalid}>{label}</Text>
       <TextInput
-        style={[styles.input, isInvaild && styles.inputInValid]} // 스타일 적용이 두개 이상이면 배열로 묶어서 전달.
+        style={[styles.input, isInvalid && styles.inputInValid]} // 스타일 적용이 두개 이상이면 배열로 묶어서 전달.
         autoCapitalize='none'
         keyboardType={keyboardType}
         secureTextEntry={secure}
