@@ -2,19 +2,19 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import AuthForm from './components/Auth/AuthForm';
 import AuthContent from './components/Auth/AuthContent';
-import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import { Colors } from './constants/styles';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import WelcomeScreen from './screens/WelecomeScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
 import { useContext } from 'react';
-import AuthContext from './components/Auth/AuthContext';
+import AuthContextProvider, { AuthContext } from './store/auth-context';
+import IconButton from './components/ui/IconButton';
 
 const Stack = createNativeStackNavigator();
 
-// 아직 인증이 되지 않은 사용자가 보게될 화면 stack
+// 아직 인증이 되지 않은 사용자가 보게 될 화면 stack
 const AuthStack = () => {
   return (
     <Stack.Navigator
@@ -32,8 +32,10 @@ const AuthStack = () => {
   );
 };
 
-// 인증이 완료된 사용자다 보게 될 stack
+// 인증이 완료된 사용자가 보게 될 stack
 const AuthenticatedStack = () => {
+  const { logout } = useContext(AuthContext);
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -42,12 +44,27 @@ const AuthenticatedStack = () => {
         contentStyle: { backgroundColor: Colors.primary100 },
       }}
     >
-      <Stack.Screen name='Welcome' comopnet={WelcomeScreen} />
+      <Stack.Screen
+        name='Welcome'
+        component={WelcomeScreen}
+        options={{
+          headerRight: () => {
+            return (
+              <IconButton
+                icon='exit'
+                color='white'
+                size={30}
+                onPress={logout}
+              />
+            );
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
-const Navication = () => {
+const Navigation = () => {
   const authCtx = useContext(AuthContext);
   console.log('isLoggedin: ', authCtx.isLoggedIn);
 
@@ -62,9 +79,9 @@ const Navication = () => {
 export default function App() {
   return (
     <>
-      <StatusBar style='ligth' />
+      <StatusBar style='light' />
       <AuthContextProvider>
-        <Navication />
+        <Navigation />
       </AuthContextProvider>
     </>
   );
