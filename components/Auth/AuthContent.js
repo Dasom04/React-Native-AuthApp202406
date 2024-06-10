@@ -50,7 +50,7 @@ const AuthContent = ({ onAuthenticate }) => {
   };
 
   return (
-    <View style={styles.AuthContent}>
+    <View style={styles.authContent}>
       <AuthForm
         isLogin={isLogin}
         onSubmit={submitHandler}
@@ -68,7 +68,7 @@ const AuthContent = ({ onAuthenticate }) => {
 export default AuthContent;
 
 const styles = StyleSheet.create({
-  AuthContent: {
+  authContent: {
     marginTop: 64,
     marginHorizontal: 32,
     padding: 16,
