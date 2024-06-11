@@ -11,6 +11,7 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import { useContext } from 'react';
 import AuthContextProvider, { AuthContext } from './store/auth-context';
 import IconButton from './components/ui/IconButton';
+import TodoTemplate from './components/todo/TodoTemplate';
 
 const Stack = createNativeStackNavigator();
 
@@ -60,6 +61,7 @@ const AuthenticatedStack = () => {
           },
         }}
       />
+      <Stack.Screen name='TodoTemplate' component={TodoTemplate} />
     </Stack.Navigator>
   );
 };
